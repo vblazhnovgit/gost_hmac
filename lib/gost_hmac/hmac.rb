@@ -14,34 +14,24 @@ include CryptoGost3411
       else
         standard_key = Gost3411.new(64).update(key).final
       end
-      puts 'standard_key:'
-      self.class.printBytes(standard_key)
       ipad = standard_key.dup
       @opad = standard_key.dup
       (0...64).each do |i|
         ipad[i] = (ipad[i].ord ^ 0x36).chr
         @opad[i] = (@opad[i].ord ^ 0x5c).chr
       end
-      puts 'ipad:'
-      self.class.printBytes(ipad)
-      puts '@opad:'
-      self.class.printBytes(@opad)
       @dgst_ctx = Gost3411.new(@dgst_size)
       @dgst_ctx.update(ipad)
     end
     
     def update(data)
       @dgst_ctx.update(data)
+      return self
     end
     
     def final
       hmac_buf = @dgst_ctx.final
-      puts 'hmac_buf:'
-      self.class.printBytes(hmac_buf)
-      
-      hmac = Gost3411.new(@dgst_size).update(@opad).update(hmac_buf).final      
-      puts 'hmac:'
-      self.class.printBytes(hmac)
+      hmac = Gost3411.new(@dgst_size).update(@opad).update(hmac_buf).final  
       hmac
     end
     
