@@ -38,6 +38,7 @@ include CryptoGost3411
     def reset
       @dgst_ctx = Gost3411.new(@dgst_size)
       @dgst_ctx.update(@ipad)
+      return self
     end
     
     protected
