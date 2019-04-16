@@ -1,6 +1,6 @@
+require 'crypto_gost3411'
 require "gost_hmac/version"
 
 module GostHmac
-  class Error < StandardError; end
-  # Your code goes here...
+  require 'gost_hmac/hmac'
 end
