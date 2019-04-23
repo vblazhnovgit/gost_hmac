@@ -1,16 +1,6 @@
 module GostHmac
   class KdfTree256
     def self.generateKey(key_in, label, seed, num_R, out_len)
-=begin
-	if (kin_len != 32) {
-		rc = ER_BADPARAMS;
-		goto done;
-	}
-	if (R > 4) {
-		rc = ER_BADPARAMS;
-		goto done;
-	}
-=end
       n = out_len / 32
       if out_len % 32 > 0 then
         n += 1
