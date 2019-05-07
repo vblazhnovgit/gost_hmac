@@ -1,4 +1,6 @@
 module GostHmac
+  # Password-based GOST PKCS#5 key generation with iter_count=2000 takes a few seconds.
+  # To make it more fast use C implementation, please.
   class Pkcs5
     def self.generateKey(pswd_utf8, salt, iter_count, key_len)
       keyLen = key_len
